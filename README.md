@@ -1,2 +1,1 @@
-# cr-template-app
-Angular application to generate CR information
+Generated PDF with following command `npm install jspdf html2canvas`
