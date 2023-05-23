@@ -1,1 +1,2 @@
-Generated PDF with following command `npm install jspdf html2canvas`
+Generated PDF feature with following command   
+`npm install jspdf html2canvas`
