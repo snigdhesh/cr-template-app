@@ -1,0 +1,83 @@
+<!-- <h2>Please enter basic info</h2> -->
+<form [formGroup]="basicInfoForm" (ngSubmit)="onBasicInfoSubmit(myDialog)">
+    <div class="form-group">
+        <label for="feature">Feature</label>
+        <input type="text" class="form-control" id="feature" formControlName="feature" name="feature"
+            placeholder="What feature are you deploying? ex: percipio">
+    </div>
+    <div class="form-group">
+        <label for="featureDocumentation">Feature documenation</label>
+        <input type="text" class="form-control" id="featureDocumentation" formControlName="featureDocumentation"
+            name="featureDocumentation"
+            placeholder="Where can I find documenation on feature? ex: sharepoint link or JIRA story">
+    </div>
+    <div class="form-group">
+        <label for="applicationName">Application name</label>
+        <input type="text" class="form-control" id="applicationName" formControlName="applicationName"
+            name="applicationName" placeholder="What is the applicationName you are going to deploy?">
+    </div>
+    <div class="form-group">
+        <label for="gitRepo">Git repo URL</label>
+        <input type="text" class="form-control" id="gitRepo" formControlName="gitRepo" name="gitRepo"
+            placeholder="Please enter git repo URL">
+    </div>
+    <div class="form-group">
+        <label for="gitBranch">Git repo branch name</label>
+        <input type="text" class="form-control" id="gitBranch" formControlName="gitBranch" name="gitBranch"
+            placeholder="Please enter git repo branch to be deployed">
+    </div>
+    <div class="form-group">
+        <label for="mergeRequest">MR to tmo/main link</label>
+        <input type="text" class="form-control" id="mergeRequest" formControlName="mergeRequest" name="mergeRequest"
+            placeholder="Please enter merge request link to tmo/main">
+    </div>
+    <div class="form-group">
+        <label for="sis">SIS plan</label>
+        <textarea class="form-control" id="textarea" rows="4" formControlName="sis" name="sis"
+            placeholder="Please enter SIS plan with appropriate dates if possible, or a sharepoint link works"></textarea>
+    </div>
+    <div class="btn-container">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="button" (click)="autoFill()" class="btn btn-primary" value="Test data">
+        <input type="button" (click)="clearForm()" class="btn btn-primary" value="clear">
+    </div>
+</form>
+
+<dialog #myDialog>
+    <div style="margin: 5%;font-size: 1em;">
+        <form class="summary">
+            <div class="row">
+                <div class="col-sm-3"><label for="">feature</label></div>
+                <div class="col-sm-3"><label for="">{{formData.feature}}</label></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"><label for="">featureDocumentation</label></div>
+                <div class="col-sm-3"><label for="">{{formData.featureDocumentation}}</label></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"><label for="">applicationName</label></div>
+                <div class="col-sm-3"><label for="">{{formData.applicationName}}</label></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"><label for="">gitRepo</label></div>
+                <div class="col-sm-3"><label for="">{{formData.gitRepo}}</label></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"><label for="">gitBranch</label></div>
+                <div class="col-sm-3"><label for="">{{formData.gitBranch}}</label></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"><label for="">mergeRequest</label></div>
+                <div class="col-sm-3"><label for="">{{formData.mergeRequest}}</label></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"><label for="">sis</label></div>
+                <div class="col-sm-3"><label for="">{{formData.sis}}</label></div>
+            </div>
+        </form>
+    </div>
+    <div style="margin: 2%;font-size: 1em;">{{formStatus}}</div>
+    <div class="btn-container">
+        <button class="btn btn-primary" (click)="myDialog.close()">OK</button>
+    </div>
+</dialog>

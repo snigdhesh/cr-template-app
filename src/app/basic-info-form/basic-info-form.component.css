@@ -1,0 +1,28 @@
+.btn-container{
+   display: flex;
+   gap: 10px;
+   justify-content: flex-end;
+}
+
+.btn-container button, .btn-container input{
+    background-color: #E20074;
+    border: #E20074;
+}
+
+.btn-container button:hover, .btn-container input:hover{
+    background-color: white;
+    border: 2px solid #E20074;
+    color: #E20074;
+}
+
+dialog{
+   border: 1px solid silver;
+   border-radius: 10px;
+   width: 50%;
+   height: fit-content;
+   white-space: break-spaces; /*This will allow us to use /n in normal text for next lines.*/
+}
+
+.summary > div > div:first-child{
+    font-weight: bold;
+}
