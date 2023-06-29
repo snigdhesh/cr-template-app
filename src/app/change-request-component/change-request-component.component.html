@@ -31,110 +31,12 @@
 
     <div class="tab-content mt-3">
         <div class="tab-pane fade show active" id="tab1">
-            <!-- <h2>Please enter basic info</h2> -->
-            <form (ngSubmit)="onBasicInfoSubmit()">
-                <div class="form-group">
-                    <label for="feature">Feature</label>
-                    <input type="text" class="form-control" id="feature" name="feature" [(ngModel)]="formData.feature"
-                        placeholder="What feature are you deploying? ex: percipio">
-                </div>
-                <div class="form-group">
-                    <label for="featureDocumentation">Feature documenation</label>
-                    <input type="text" class="form-control" id="featureDocumentation" name="featureDocumentation"
-                        [(ngModel)]="formData.featureDocumentation"
-                        placeholder="Where can I find documenation on feature? ex: sharepoint link or JIRA story">
-                </div>
-                <div class="form-group">
-                    <label for="applicationName">Application name</label>
-                    <input type="text" class="form-control" id="applicationName" name="applicationName"
-                        [(ngModel)]="formData.applicationName"
-                        placeholder="What is the applicationName you are going to deploy?">
-                </div>
-                <div class="form-group">
-                    <label for="gitRepo">Git repo URL <b>(Please do not give big links, use URL shortners)</b></label>
-                    <input type="text" class="form-control" id="gitRepo" name="gitRepo" [(ngModel)]="formData.gitRepo"
-                        ngModel placeholder="Please enter git repo URL">
-                </div>
-                <div class="form-group">
-                    <label for="gitBranch">Git repo branch name</label>
-                    <input type="text" class="form-control" id="gitBranch" name="gitBranch"
-                        [(ngModel)]="formData.gitBranch" placeholder="Please enter git repo branch to be deployed">
-                </div>
-                <div class="form-group">
-                    <label for="mergeRequest">MR to tmo/main link</label>
-                    <input type="text" class="form-control" id="mergeRequest" name="mergeRequest"
-                        [(ngModel)]="formData.mergeRequest" placeholder="Please enter merge request link to tmo/main">
-                </div>
-                <div class="form-group">
-                    <label for="sis">SIS plan</label>
-                    <textarea class="form-control" id="textarea" rows="4" name="sis" [(ngModel)]="formData.sis"
-                        placeholder="Please enter SIS plan with appropriate dates if possible, or a sharepoint link works"></textarea>
-                </div>
-                <button type="submit" class="btn btn-custom">Submit</button>
-            </form>
+            <app-basic-info-form></app-basic-info-form>
         </div>
 
         <!-- Business Justifications -->
-
         <div class="tab-pane fade" id="tab2">
-            <!-- <h4>Please enter business Justifications</h4> -->
-            <form (ngSubmit)="onBusinessJustificationsSubmit()">
-
-                <div class="form-group">
-                    <label for="urgencyCause">Why is this Change needed and why can’t it be delayed until after the
-                        Freeze period ends?</label>
-                    <textarea class="form-control" id="urgencyCause" rows="4" name="urgencyCause"
-                        [(ngModel)]="formData.urgencyCause"
-                        placeholder="(Get this from consumers)
-Example: This prod roll-out brings the required remediations which will get rid of those possible security flaws."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="impactIfDeployed">What is the anticipated impact of this Change during the Planned
-                        Deployment
-                        Window?</label>
-                    <input type="text" class="form-control" id="impactIfDeployed" name="impactIfDeployed"
-                        [(ngModel)]="formData.impactIfDeployed"
-                        placeholder="Example: No outage anticipated for existing customers">
-                </div>
-
-                <div class="form-group">
-                    <label for="isTested">Has the Change been tested, and will Testers be available during and after
-                        CR implementation?</label>
-                    <textarea class="form-control" id="isTested" rows="4" name="isTested"
-                        [(ngModel)]="formData.isTested" placeholder="Example:
-Tested in NPE by developers and NPE support. Artifacts are attached to the CR.
-Testers will be available for validations post deployment."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="whoTested">Who's testing this application post deployment?</label>
-                    <textarea class="form-control" id="whoTested" rows="4" name="whoTested"
-                        [(ngModel)]="formData.whoTested" placeholder="Example: Consumers"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="rollBackPlan">Is there a tested Rollback Plan and how long does the Rollback takes
-                        to implement?</label>
-                    <textarea class="form-control" id="rollBackPlan" rows="4" name="rollBackPlan"
-                        [(ngModel)]="formData.rollBackPlan" placeholder="Example:
-Rollback plan includes deploy the previous version.
-Rollback takes < 10 mins to implement."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="impactIfNotDeployed">What happens when we do it and it goes bad ... what break , what is the impact if our change doesn’t work as expected?</label>
-                    <textarea class="form-control" id="impactIfNotDeployed" rows="4" name="impactIfNotDeployed"
-                        [(ngModel)]="formData.impactIfNotDeployed"
-                        placeholder="(Get this from consumers)
-Example:
-No impact to the front-line users. However, SAST vulnerability issue will reappear in the next scan report."></textarea>
-                </div>
-                <button type="submit" class="btn btn-custom">Submit</button>
-            </form>
+            <app-business-justification-form></app-business-justification-form>            
         </div>
     </div>
-
-
-
 </div>
