@@ -12,3 +12,10 @@ Reference:
 
 Simple modal dialog box used in forms
 https://blog.angulartraining.com/how-to-create-a-simple-modal-dialog-with-angular-277ea7f96da1
+
+---
+Features used:
+    - custom pipes
+    - copy to clipboard
+    - creating forms with externalized data
+    - simple dialog box
