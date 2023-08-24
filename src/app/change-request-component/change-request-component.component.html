@@ -27,6 +27,9 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#tab2">Business Justifications</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tab3">Business Justifications 2</a>
+        </li>
     </ul>
 
     <div class="tab-content mt-3">
@@ -36,7 +39,12 @@
 
         <!-- Business Justifications -->
         <div class="tab-pane fade" id="tab2">
-            <app-business-justification-form></app-business-justification-form>            
+            <app-business-justification-form [data]="businessJustificationData1"></app-business-justification-form>            
+        </div>
+
+         <!-- Business Justifications 2 -->
+         <div class="tab-pane fade" id="tab3">
+            <app-business-justification-form [data]="businessJustificationData2"></app-business-justification-form>            
         </div>
     </div>
 </div>

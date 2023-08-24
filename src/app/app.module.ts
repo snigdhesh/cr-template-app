@@ -6,19 +6,22 @@ import { ChangeRequestComponentComponent } from './change-request-component/chan
 import { AppRoutingModule } from './app-routing.module';
 import { BasicInfoFormComponent } from './basic-info-form/basic-info-form.component';
 import { BusinessJustificationFormComponent } from './business-justification-form/business-justification-form.component';
-
+import { DialogFormPipe } from './pipes/dialog-form.pipe';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChangeRequestComponentComponent,
     BasicInfoFormComponent,
-    BusinessJustificationFormComponent
+    BusinessJustificationFormComponent,
+    DialogFormPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    ClipboardModule,
     ReactiveFormsModule
   ],
   providers: [],
