@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
+import { IQuestionAnswer } from '../models/IQuestionAnswer';
+import { basicInfoData } from '../data/basicInfoData';
 
 @Component({
   selector: 'app-basic-info-form',
@@ -9,6 +11,8 @@ import { FormGroup,FormControl } from '@angular/forms';
 export class BasicInfoFormComponent {
   formStatus: string="";
   formData:any;
+  questionAndSampleAnswers:IQuestionAnswer[]=[];
+  copyBtnText="copy";
 
   basicInfoForm = new FormGroup({
     feature: new FormControl(''),
@@ -21,11 +25,11 @@ export class BasicInfoFormComponent {
   })
 
   ngOnInit(){
-    this.formData=this.basicInfoForm.value
-    console.log(this.formData)
+    this.formData=this.basicInfoForm.value;
+    this.questionAndSampleAnswers=basicInfoData;
   }
+
   onBasicInfoSubmit(myDialog:any){
-    console.log(this.basicInfoForm.value)
     this.formData=this.basicInfoForm.value;    
     this.formStatus="Basic information saved successfully.\n\nPlease fill Business Justifications"
     myDialog.showModal();
@@ -33,18 +37,50 @@ export class BasicInfoFormComponent {
   }
 
   autoFill(){
-    this.basicInfoForm = new FormGroup({
-      feature: new FormControl('test'),
-      featureDocumentation: new FormControl('https://tmobileusa.sharepoint.com/sites/IdentityManagment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FIdentityManagment%2FShared%20Documents%2FIGA%2FIGA%20Projects&viewid=5aee59a2%2D5d9a%2D43c3%2D8db4%2Dfd35dbc20ef9'),
-      applicationName: new FormControl('test-app'),
-      gitRepo: new FormControl('gitlab.com/test-app'),
-      gitBranch: new FormControl('main'),
-      mergeRequest: new FormControl('gitlab.com/test-app/mr/01'),
-      sis: new FormControl("Merge > Deploy > Validate > Close CR")
+    this.questionAndSampleAnswers.forEach((item: IQuestionAnswer)=>{
+      this.basicInfoForm.get(item.attribute)?.setValue(item.sampleAnswer);
     })
+    // this.basicInfoForm = new FormGroup({
+    //   feature: new FormControl('test'),
+    //   featureDocumentation: new FormControl('https://gitlab.com'),
+    //   applicationName: new FormControl('test-app'),
+    //   gitRepo: new FormControl('gitlab.com/test-app'),
+    //   gitBranch: new FormControl('main'),
+    //   mergeRequest: new FormControl('gitlab.com/test-app/mr/01'),
+    //   sis: new FormControl("Merge > Deploy > Validate > Close CR")
+    // })
   }
 
   clearForm(){
     this.basicInfoForm.reset();
+  }
+
+  copy(){
+    var finalString:string="";
+
+    this.questionAndSampleAnswers.forEach((item:IQuestionAnswer)=>{
+       finalString=finalString.concat(this.getQA(item.question,this.formData[item.attribute])).concat("\n\n");
+    })
+
+    navigator.clipboard.writeText(finalString).then(()=>{
+      console.log("text copied to clipboard");
+    })
+    .catch((error) => {
+      console.error('Failed to copy text to clipboard:', error);
+    });
+
+    this.resetCopyButton();
+  }
+
+  getQA(question:string, answer: string){
+    return question.concat("\n").concat(answer);
+  }
+
+  resetCopyButton(){    
+    this.copyBtnText="Copied to clipboard";
+    
+    setTimeout(()=>{
+      this.copyBtnText="copy"
+    },2000);
   }
 }

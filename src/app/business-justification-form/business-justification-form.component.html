@@ -1,112 +1,44 @@
-<form [formGroup]="businessJustificationForm" (ngSubmit)="onBusinessJustificationsSubmit(myDialog)">
-
-    <div class="form-group">
-        <label for="urgencyCause">Why is this Change needed and why can’t it be delayed until after the
-            Freeze period ends?</label>
-        <textarea class="form-control" id="urgencyCause" rows="4" formControlName="urgencyCause"
-            placeholder="(Get this from consumers)
-Example: This prod roll-out brings the required remediations which will get rid of those possible security flaws."></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="impactIfDeployed">What is the anticipated impact of this Change during the Planned
-            Deployment
-            Window?</label>
-        <input type="text" class="form-control" id="impactIfDeployed" formControlName="impactIfDeployed"
-            placeholder="Example: No outage anticipated for existing customers">
-    </div>
-
-    <div class="form-group">
-        <label for="isTested">Has the Change been tested, and will Testers be available during and after
-            CR implementation?</label>
-        <textarea class="form-control" id="isTested" rows="4" formControlName="isTested" placeholder="Example:
-Tested in NPE by developers and NPE support. Artifacts are attached to the CR.
-Testers will be available for validations post deployment."></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="whoTested">Who's testing this application post deployment?</label>
-        <textarea class="form-control" id="whoTested" rows="4" formControlName="whoTested"
-            placeholder="Example: Consumers"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="rollBackPlan">Is there a tested Rollback Plan and how long does the Rollback takes
-            to implement?</label>
-        <textarea class="form-control" id="rollBackPlan" rows="4" formControlName="rollBackPlan" placeholder="Example:
-Rollback plan includes deploy the previous version.
-Rollback takes < 10 mins to implement."></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="impactIfNotDeployed">What happens when we do it and it goes bad ... what break , what is the impact
-            if our change doesn’t work as expected?</label>
-        <textarea class="form-control" id="impactIfNotDeployed" rows="4" formControlName="impactIfNotDeployed"
-            placeholder="(Get this from consumers)
-Example:
-No impact to the front-line users. However, SAST vulnerability issue will reappear in the next scan report."></textarea>
-    </div>
-    <div class="btn-container">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <input type="button" (click)="autoFill()" class="btn btn-primary" value="Test data">
-        <input type="button" (click)="clearForm()" class="btn btn-primary" value="clear">
-    </div>
+<form
+  [formGroup]="businessJustificationForm"
+  (ngSubmit)="onBusinessJustificationsSubmit(myDialog)"
+>
+  <div class="form-group" *ngFor="let i of questionAndSampleAnswers">
+    <label for="">{{ i.question }}</label>
+    <textarea
+      class="form-control"
+      id="{{ i.attribute }}"
+      rows="4"
+      formControlName="{{ i.attribute }}"
+      placeholder="{{ i.placeholder }}"
+    ></textarea>
+  </div>
+  <div class="btn-container">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <input
+      type="button"
+      (click)="autoFill()"
+      class="btn btn-primary"
+      value="Test data"
+    />
+    <input
+      type="button"
+      (click)="clearForm()"
+      class="btn btn-primary"
+      value="clear"
+    />
+  </div>
 </form>
 
-<dialog #myDialog>
-    <div style="margin: 5%;font-size: 1em;">
-        <div class="card">
-            <div class="card-header">
-                Why is this Change needed and why can’t it be delayed until after the Freeze period ends?
-            </div>
-            <div class="card-body">
-                {{formData.urgencyCause}}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                What is the anticipated impact of this Change during the Planned Deployment Window?
-            </div>
-            <div class="card-body">
-                {{formData.impactIfDeployed}}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                Has the Change been tested, and will Testers be available during and after CR implementation?
-            </div>
-            <div class="card-body">
-                {{formData.isTested}}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                Who's testing this application post deployment?
-            </div>
-            <div class="card-body">
-                {{formData.whoTested}}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                Is there a tested Rollback Plan and how long does the Rollback takes to implement?
-            </div>
-            <div class="card-body">
-                {{formData.rollBackPlan}}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                What happens when we do it and it goes bad ... what break , what is the impact if our change doesn’t
-                work as expected?
-            </div>
-            <div class="card-body">
-                {{formData.impactIfNotDeployed}}
-            </div>
-        </div>
+<dialog #myDialog style="width: 60%; font-size: 12px">
+  <div class="btn-container">
+    <button class="btn btn-primary" (click)="myDialog.close()">OK</button>
+    <button class="btn btn-primary" (click)="copy()">{{copyBtnText}}</button>
+  </div>
+  <div class="card" *ngFor="let i of questionAndSampleAnswers">
+    <div class="card-header">{{ i.question }}</div>
+    <div class="card-body">
+      {{ formData | dialogForm : i.attribute : formData }}
     </div>
-    <div style="margin: 2%;font-size: 1em;">{{formStatus}}</div>
-    <div class="btn-container">
-        <button class="btn btn-primary" (click)="myDialog.close()">OK</button>
-    </div>
+  </div>
+  <div>{{ formStatus }}</div>
 </dialog>

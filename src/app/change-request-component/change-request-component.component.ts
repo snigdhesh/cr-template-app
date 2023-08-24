@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { businessJustificationData } from '../data/businessJustificationData';
+import { businessJustificationData2 } from '../data/businessJustificationData2';
 
 @Component({
   selector: 'app-change-request-component',
@@ -13,10 +15,14 @@ export class ChangeRequestComponentComponent {
   formData: any = {}; // Initialize an empty object to store form data
   basicInfoElement: any;
   businessJustificationsElement: any;
+  businessJustificationData1: any;
+  businessJustificationData2: any;
 
   ngOnInit() {
     this.basicInfoElement = document.getElementById('basicInfoPDFContent');
     this.businessJustificationsElement=document.getElementById('businessJustificationsPDFContent');
+    this.businessJustificationData1=businessJustificationData;
+    this.businessJustificationData2=businessJustificationData2;
   }
 
   onBasicInfoSubmit() {

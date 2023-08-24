@@ -1,5 +1,6 @@
-- Generated PDF feature with following command   
-`npm install jspdf html2canvas`
+- Copy button 
+source: https://www.youtube.com/watch?v=iyGOszt2DHg
+`npm i @angular/cdk@14`
 
 ### How to deploy?
 - Use this command on local to generate build package   
